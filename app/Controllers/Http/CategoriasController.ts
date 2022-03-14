@@ -6,7 +6,7 @@ import Categoria from "App/Models/Categoria"
 export default class CategoriasController {
   public async mostrarCategorias()
   {
-    const categoria= await Database.query().from('categorias').select('*').orderBy('id')
+    const categoria= await Database.query().from('categorias').select('*').orderBy('id_categoria')
     return categoria
   }
 
