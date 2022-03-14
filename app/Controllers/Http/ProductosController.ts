@@ -1,4 +1,4 @@
-// import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import Database from "@ioc:Adonis/Lucid/Database"
 import Producto from "App/Models/Producto"
@@ -29,4 +29,21 @@ export default class ProductosController {
 
 
   }
+  public async modificarProducto({request,response,params})
+   {
+     const precio=request.input(['precio'])
+
+     const producto=await Producto.findOrFail(params.id)
+     producto.precio=precio
+
+     await producto.save()
+     response.json(producto)
+   }
+   public async eliminarProducto({params,response}:HttpContextContract)
+   {
+     const producto= await Producto.findOrFail(params.id)
+     await producto.delete()
+
+    return response.json(producto)
+   }
 }
